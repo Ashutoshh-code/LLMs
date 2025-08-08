@@ -1,0 +1,35 @@
+# Traditional search (like keyword search) checks exact words in a query and matches them in documents.
+
+# Semantic search instead tries to understand the meaning of the query and match it to conceptually related text, even if the exact words differ.
+
+# Example : Query -> "How to fix a leaking tap", Semantic search might return documents containing "How to repair a dripping faucet" because it understands tap ≈ faucet, fix ≈ repair, leak ≈ dripping.
+
+# Core steps in logic:
+
+a) Understand meaning of text — Represent words, sentences, or documents as high-dimensional embeddings that capture semantic meaning.
+
+b) Compare meanings — Find items whose embeddings are most similar to the query's embedding.
+
+c) Return ranked results — Sort by similarity score and return the best matches.
+
+
+
+                            ==========+ ALGORITHM +=========
+Here’s a high-level algorithm for semantic search:
+OFFLINE STAGE (Indexing) :
+1. Data Collection : Collect all the text/documents you want to search through.
+2. Preprocessing (optional but common) : Clean text (remove HTML, punctuation, special symbols), Normalize (lowercasing, stemming/lemmatization if desired).
+3. Embedding Generation : Use a pre-trained embedding model (e.g., OpenAI text-embedding-3-large, Sentence-BERT, InstructorXL) Convert each document into a vector (e.g., 768 or 1536 dimensions) that represents its meaning.
+4. Indexing for Fast Search : Store these vectors in a vector database (e.g., Pinecone, Weaviate, Milvus, FAISS) for fast nearest neighbor lookups.
+
+ONLINE STAGE (Query Time) :
+1. Query Embedding : Take the search query and embed it using the same model as the documents.
+2. Similarity Search : Compute similarity between the query vector and document vectors. Common similarity metrics: Cosine Similarity, Dot Product, Euclidean Distance.
+3. Ranking : Rank documents based on similarity score (highest = most relevant).
+4. Return Results : Return the top-k most relevant documents.
+
+
+
+                            ==========+ COMPLEXITY +==========
+# Without indexing: Comparing query against n documents → O(n × d) where d = embedding dimensions.
+# With ANN indexing (e.g., HNSW, IVF): Search in O(log n) or sublinear time with some trade-off in accuracy.
