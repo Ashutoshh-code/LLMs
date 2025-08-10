@@ -76,7 +76,25 @@ collection = chroma_client.get_or_create_collection(name=COLLECTION_NAME)
 texts = [
     "I love travelling.",
     "AI is transforming the world.",
-    "PUBG is the best video game."
+    "PUBG is the best video game.",
+    "Dhoni is one of the best cricketers in the world.",
+    "Will AI take over the world?",
+    "The weather is nice today.",
+    "I enjoy reading books on AI and technology.",
+    "The fiture of LLMs is promising.",
+    "Python is a versatile programming language.",
+    "The future of AI is bright.",
+    "I am learning about semantic search.",
+    "ChromaDB is a great tool for semantic search.",
+    "I love playing cricket.",
+    "The future of technology is exciting.",
+    "I enjoy watching movies and series.",
+    "The advancements in AI are remarkable.",
+    "I am interested in machine learning.",
+    "The future of gaming is evolving.",
+    "I like to explore new places.",
+    "The future of programming is evolving.",
+    "I am passionate about data science."
 ]
 ids = [f"doc_{i}" for i in range(len(texts))]  # Generate unique IDs for each text
 embeddings = get_embeddings(texts)  # Get embeddings for the texts
@@ -94,7 +112,7 @@ query_embedding = get_embedding(query_text)  # Get embedding for the query text
 
 results = collection.query(
     query_embeddings=[query_embedding],  # Use the query embedding
-    n_results=3,  # Number of results to return
+    n_results=2,  # Number of results to return
     include=["documents", "distances"]
 )
 
